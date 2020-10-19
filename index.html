@@ -34,23 +34,13 @@ Pending Updates :
 
 <script>
 if (localStorage.res) {
-try {
   StartPolling ();
-}
-catch(err) {
-  alert(err.name + " " + ":" + " " + err.message);
-}
 } else {
 var Val = prompt("Password","");
 var WebAppURL = "https://script.google.com/macros/s/AKfycbzVJMGeKSMWSCLOo44MvWmGFT2EyBTwSvDJhKUr23uzIyJ9E7k/exec";
 var formData = new FormData();
 formData.append('pass', Val);
-try {
   FecthToken(WebAppURL,formData);
-}
-catch(err) {
-  alert(err.name + " " + ":" + " " + err.message);
-}
 }
 
 var token;
@@ -92,6 +82,7 @@ function StopPolling(){
 async function Main(){
   var url = telegramUrl + "/getUpdates";
   if(Runable){
+  try {
     var params = {offset: UpdateId};
     var res = await FecthPost(url,params);
     var updates = res.result.length;
@@ -108,6 +99,11 @@ async function Main(){
   document.getElementById("timediff").innerHTML= ((NewTime-GlobalTime)/1000)+"sec";
   GlobalTime= NewTime;
   Main();
+}
+catch(err) {
+  StartPolling ();
+  //alert(err.name + " " + ":" + " " + err.message);
+}  
   }
 }
   
