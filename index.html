@@ -36,11 +36,9 @@ Pending Updates :
 if (localStorage.res) {
   StartPolling ();
 } else {
-var Val = prompt("Password","");
-var WebAppURL = "https://script.google.com/macros/s/AKfycbzVJMGeKSMWSCLOo44MvWmGFT2EyBTwSvDJhKUr23uzIyJ9E7k/exec";
-var formData = new FormData();
-formData.append('pass', Val);
-  FecthToken(WebAppURL,formData);
+var Val = prompt("Enter Bot token","");
+localStorage.res = Val;  
+StartPolling ();
 }
 
 var token;
@@ -102,7 +100,6 @@ async function Main(){
 }
 catch(err) {
   StartPolling ();
-  //alert(err.name + " " + ":" + " " + err.message);
 }  
   }
 }
@@ -133,17 +130,6 @@ async function sendPhoto(response) {
 function MessageSent(res){
   var myJSON = JSON.stringify(res);
   document.getElementById("demo").innerHTML += myJSON+"<br><br>";
-}
-
-async function FecthToken(WebAppURL,formData){
-  var res = await fetch(WebAppURL,{method: 'POST',body: formData});
-  var res = await res.text();
-  if (res != "Unauthorised Access!!"){
-  localStorage.res = res;  
-  StartPolling ();
-  }else{
-  alert(res);
-  }
 }
 
 async function FecthGet(url){
