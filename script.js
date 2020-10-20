@@ -81,10 +81,14 @@ function Process(response){
 }
 
 async function sendMessage(response) {
-  var params = {chat_id: response.message.chat.id, text: response.message.text, reply_to_message_id:response.message.message_id};
-  var url = telegramUrl + "/sendMessage";
-  var res = await FecthPost(url,params);
-  MessageSent(res);
+  try {
+    var params = {chat_id: response.message.chat.id, text: response.message.text, reply_to_message_id:response.message.message_id};
+    var url = telegramUrl + "/sendMessage";
+    var res = await FecthPost(url,params);
+    MessageSent(res);
+  }catch(err) {
+  sendMessage(response);
+  }
 }
 
 async function sendPhoto(response) {
