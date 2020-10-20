@@ -87,7 +87,7 @@ async function sendMessage(response) {
     var res = await FecthPost(url,params);
     MessageSent(res);
   }catch(err) {
-  sendMessage(response);
+  sendMessage();
   }
 }
 
