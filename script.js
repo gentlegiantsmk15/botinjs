@@ -64,7 +64,9 @@ async function Main(){
   Main();
 }
 catch(err) {
-  StartPolling ();
+  document.getElementById("timediff").innerHTML="Calculating...";
+  document.getElementById("updates").innerHTML="Calculating...";
+  Main();
 }  
   }
 }
